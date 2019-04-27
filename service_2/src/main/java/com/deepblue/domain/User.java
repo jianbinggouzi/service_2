@@ -17,6 +17,16 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "t_user")
 public class User extends BaseDomain {
 
+	public static final int USER_LOCK = 1;
+
+	public static final int USER_UNLOCK = 0;
+
+	public static final int USER_NO_VIP = 1;
+
+	public static final int USER_VIP = 2;
+
+	public static final int USER_ADMIN = 3;
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(generator = "paymentableGenerator")

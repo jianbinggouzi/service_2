@@ -49,6 +49,18 @@ public class Dynamics extends BaseDomain {
 	@Column(name = "collects")
 	private int collects;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public int getCollects() {
 		return collects;
 	}

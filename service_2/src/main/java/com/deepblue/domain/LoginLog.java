@@ -27,7 +27,7 @@ public class LoginLog extends BaseDomain {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private String userId;
+	private User user;
 
 	@Column(name = "ip")
 	private String ip;
@@ -43,12 +43,12 @@ public class LoginLog extends BaseDomain {
 		LoginLogId = loginLogId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getIp() {

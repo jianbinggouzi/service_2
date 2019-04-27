@@ -35,7 +35,7 @@ public class Letter extends BaseDomain {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private String userId;
+	private User user;
 
 	@Column(name = "create_time")
 	private Date createTime;
@@ -86,12 +86,12 @@ public class Letter extends BaseDomain {
 		return letterTitle;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
 	public void setCreateTime(Date createTime) {
