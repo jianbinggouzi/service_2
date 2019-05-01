@@ -7,28 +7,14 @@
 <html>
 	<head>
 		<meta content="Content-Type" content="text/html; charset=UTF-8">
-		<title>用户登录</title>
+		<title>单个结果</title>
 	</head>
 	<body>
+		${result }
+		<!-- 
 		<c:if test="${!empty errorMsg}">
 			<div style="color:red">${errorMsg}</div>
 		</c:if>
-		<form action="${context}/login/doLogin.html" method="post">
-			<table>
-				<tr>
-					<td width="20%">用户名</td>
-					<td width="80%"><input type="text" name="userName"/></td>
-				</tr>
-				<tr>
-					<td width="20%">密码</td>
-					<td width="80%"><input type="password" name="password"/></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="submit" value="登录"/>
-					</td>
-				</tr>	
-			</table>
-		</form>
+		 -->
 	</body>
 </html>

@@ -8,7 +8,7 @@ import com.deepblue.domain.User;
 
 @Repository
 public class UserDao extends BaseDao<User> {
-	private static final String GET_USER_BY_NAME = "from User u where u.userName = ?";
+	private static final String GET_USER_BY_NAME = "from User where userName = ?";
 	private static final String QUERY_USER_BY_NAME = "from User u where u.userName like ?";
 
 	/**

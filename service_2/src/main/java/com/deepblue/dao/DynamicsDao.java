@@ -18,6 +18,6 @@ public class DynamicsDao extends BaseDao<Dynamics> {
 	 * @return
 	 */
 	public Page queryDynamiceBuUserId(String userId, int pageNo, int pageSize) {
-		return pageQuery(GET_DYNAMICS_BY_USER_ID, pageNo, pageSize, userId);
+		return pageQueryByHQL(GET_DYNAMICS_BY_USER_ID, pageNo, pageSize, userId);
 	}
 }

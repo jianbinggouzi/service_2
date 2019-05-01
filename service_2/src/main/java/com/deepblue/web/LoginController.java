@@ -41,14 +41,23 @@ public class LoginController extends BaseController {
 	@RequestMapping("/doLogin")
 	public ModelAndView login(HttpServletRequest request, User user) {
 		System.out.println("收到登录请求");
-		User _user = userService.getUserBuUserName(user.getUserName());
+		User _user = userService.getUserByUserName(user.getUserName());
 		ModelAndView view = new ModelAndView();
-		view.setViewName("forward:/login");
+		view.setViewName("forward:/login.jsp");
+		System.out.println("userName:" + user.getUserName() + " password:" + user.getPassword());
 		if (_user == null) {
 			view.addObject("errorMsg", "用户不存在");
-		} else if (_user.getPassword().equals(user.getPassword())) {
+			System.out.println("用户名不存在");
+		} else if (!_user.getPassword().equals(user.getPassword())) {
 			view.addObject("errorMsg", "用户名/密码错误");
+			System.out.println("用户名/密码错误");
+			System.out.println("_userName:" + _user.getUserName() + " _password:" + _user.getPassword());
 		} else {
+
+			userService._getUserById(_user.getUserId());
+			System.out.println("" + 2 + "-------------");
+
+			System.out.println("-----------");
 			_user.setLastIp(request.getRemoteAddr());
 			_user.setLastVisit(new Date());
 			userService.loginSuccess(_user);

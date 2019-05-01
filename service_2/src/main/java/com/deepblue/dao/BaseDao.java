@@ -152,7 +152,7 @@ public class BaseDao<T> {
 	}
 
 	/**
-	 * 分页查询
+	 * 根据hql分页查询
 	 * 
 	 * @param hql
 	 * @param pageNo
@@ -161,7 +161,7 @@ public class BaseDao<T> {
 	 * @param params
 	 * @return
 	 */
-	public Page pageQuery(String hql, int pageNo, int pageSize, Object... params) {
+	public Page pageQueryByHQL(String hql, int pageNo, int pageSize, Object... params) {
 		String countQueryString = "select count (*)" + removeSelect(removeOrders(hql));
 		List listCount = getHibernateTemplate().find(countQueryString, params);
 		long totalCount = (Long) (listCount.get(0));
@@ -172,6 +172,22 @@ public class BaseDao<T> {
 		int startIndex = Page.getStartOfPage(pageNo, pageSize);
 		Query query = createQuery(hql, params);
 		List list = query.setFirstResult(startIndex).setMaxResults(pageSize).list();
+		return new Page(startIndex, totalCount, pageSize, list);
+	}
+
+	/**
+	 * 根据示例分页查询
+	 * 
+	 * @param example
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public Page pageQueryByExample(Object example, int pageNo, int pageSize) {
+		int startIndex = Page.getStartOfPage(pageNo, pageSize);
+		List<T> _totalCount = (List<T>) getHibernateTemplate().findByExample(example);
+		long totalCount = (Long) (_totalCount.get(0));
+		List list = getHibernateTemplate().findByExample(example, pageNo, pageSize);
 		return new Page(startIndex, totalCount, pageSize, list);
 	}
 

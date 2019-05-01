@@ -1,12 +1,9 @@
 package com.deepblue.domain;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,31 +11,17 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "t_letter")
-public class Letter extends BaseDomain {
-
-	@Id
-	@Column(name = "letter_id")
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	private String letterId;
+public class Letter extends EntityBaseDomain {
 
 	@Column(name = "board_id")
 	private String boardId;
 
 	@Column(name = "letter_title")
 	private String letterTitle;
-
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
-	@Column(name = "create_time")
-	private Date createTime;
 
 	@Column(name = "letter_views")
 	private int letterViews;
@@ -59,15 +42,29 @@ public class Letter extends BaseDomain {
 	@JoinColumn(name = "post_id")
 	private Post mainPost;
 
+	@Column(name = "letter_thanks")
+	private int thanks;
+
 	@Transient
 	private Set<Post> comments;
 
-	public void setLetterId(String letterId) {
-		this.letterId = letterId;
+	@Column(name = "letter_type")
+	private int letterType;
+
+	public int getThanks() {
+		return thanks;
 	}
 
-	public String getLetterId() {
-		return letterId;
+	public void setThanks(int thanks) {
+		this.thanks = thanks;
+	}
+
+	public int getLetteType() {
+		return letterType;
+	}
+
+	public void setLetterType(int letterType) {
+		this.letterType = letterType;
 	}
 
 	public void setBoardId(String boardId) {
@@ -84,22 +81,6 @@ public class Letter extends BaseDomain {
 
 	public String getLetterTitle() {
 		return letterTitle;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
 	}
 
 	public void setLetterViews(int letterViews) {

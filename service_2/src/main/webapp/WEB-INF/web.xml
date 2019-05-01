@@ -86,4 +86,29 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<!-- 自己配置描述文件，需要多少个描述文件就配置多少 -->
+<jsp-config>
+    <!-- 配置c描述文件-对应c标签，这里的taglib-uri对应jsp中引入的uri -->
+    <taglib>
+        <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+        <taglib-location>/WEB-INF/c.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+        <taglib-location>/WEB-INF/fn.tld</taglib-location>
+    </taglib>
+</jsp-config>		
+	
+	
 </web-app>
+
+
+
+
+
+
+
+
+
+
+

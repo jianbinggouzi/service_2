@@ -63,7 +63,7 @@ public class UserService {
 	 * @param userName
 	 * @return
 	 */
-	public User getUserBuUserName(String userName) {
+	public User getUserByUserName(String userName) {
 		return userDao.getUsersByName(userName);
 	}
 
@@ -130,6 +130,14 @@ public class UserService {
 		loginLog.setTime(new Date());
 		userDao.update(user);
 		loginLogDao.save(loginLog);
+	}
+
+	public void _getUserById(String userId) {
+		userDao.get(userId);
+	}
+
+	public void _getUserBuUser(User user) {
+		userDao.get(user);
 	}
 
 }

@@ -51,7 +51,7 @@ public class User extends BaseDomain {
 	@Column(name = "credit")
 	private long credit;
 
-	@Column(name = "laset_visit")
+	@Column(name = "last_visit")
 	private Date lastVisit;
 
 	@Column(name = "last_ip")

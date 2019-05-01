@@ -1,12 +1,9 @@
 package com.deepblue.domain;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,24 +11,14 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "t_dynamicses")
-public class Dynamics extends BaseDomain {
-
-	@Id
-	@Column(name = "dynamics_id")
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	private String dynamicsId;
+@Table(name = "t_dynamics")
+public class Dynamics extends EntityBaseDomain {
 
 	@Column(name = "dynamics_title")
 	private String dynamicsTitle;
-
-	@Column(name = "create_time")
-	private Date createDate;
 
 	@Column(name = "views")
 	private int views;
@@ -48,18 +35,6 @@ public class Dynamics extends BaseDomain {
 
 	@Column(name = "collects")
 	private int collects;
-
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public int getCollects() {
 		return collects;
@@ -80,28 +55,12 @@ public class Dynamics extends BaseDomain {
 	@Transient
 	private Set<Post> comments;
 
-	public String getDynamicsId() {
-		return dynamicsId;
-	}
-
-	public void setDynamicsId(String dynamicsId) {
-		this.dynamicsId = dynamicsId;
-	}
-
 	public String getDynamicsTitle() {
 		return dynamicsTitle;
 	}
 
 	public void setDynamicsTitle(String dynamicsTitle) {
 		this.dynamicsTitle = dynamicsTitle;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	public int getViews() {

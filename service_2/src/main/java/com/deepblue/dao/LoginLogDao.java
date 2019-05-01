@@ -6,7 +6,5 @@ import com.deepblue.domain.LoginLog;
 
 @Repository
 public class LoginLogDao extends BaseDao<LoginLog> {
-	public void save(LoginLog loginLog) {
-		getHibernateTemplate().save(loginLog);
-	}
+
 }

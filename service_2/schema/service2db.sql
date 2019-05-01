@@ -63,6 +63,16 @@ create table t_dynamicses(
 	collects int(11) default '0' not null comment '收藏数'
 )engine = innodb default charset = utf8;
 
+create table t_operate_log(
+	operate_log_id varchar(48) primary key comment '操作记录id',
+	entity_id varchar(48) not null comment '实体id',
+	sender_id varchar(48) not null comment '发送者id',
+	receiver_id varchar(48) not null comment '接收者id',
+	operate_type int(4) not null comment '操作类型',
+	time datetime not null comment '时间',
+	entity_type int(4) not null comment '实体类型'
+)engine = innodb default charset = utf8;
+
 
 
 

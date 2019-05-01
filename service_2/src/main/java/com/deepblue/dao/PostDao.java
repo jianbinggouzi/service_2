@@ -11,6 +11,34 @@ public class PostDao extends BaseDao<Post> {
 	private static final String GET_POST = "from Post where postId = ?";
 	private static final String DELETE_POST = "delete from Post where postId = ?";
 
+	private static final String GET_USER_SEND_POST = "from Post where fromUser = ? order by createTime desc";
+
+	private static final String GET_USER_RECEIVE_POST = "from Post where toUser = ? order by createTime desc";
+
+	/**
+	 * 获取指定用户发出的评论
+	 * 
+	 * @param userId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public Page getUserSendPosts(String userId, int pageNo, int pageSize) {
+		return pageQueryByHQL(GET_USER_SEND_POST, pageNo, pageSize, userId);
+	}
+
+	/**
+	 * 获取用户收到评论
+	 * 
+	 * @param userId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public Page getUserReceivePosts(String userId, int pageNo, int pageSize) {
+		return pageQueryByHQL(GET_USER_RECEIVE_POST, pageNo, pageSize, userId);
+	}
+
 	/**
 	 * 获取指定Post
 	 * 

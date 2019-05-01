@@ -47,4 +47,9 @@ public class RegisterController extends BaseController {
 		return view;
 	}
 
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(HttpServletRequest request) {
+		return "index";
+	}
+
 }
