@@ -28,7 +28,7 @@ create table t_board(
 )engine = innodb default charset = utf8;
 
 create table t_letter(
-	letter_id varchar(48) primary key comment '信件id',
+	entity_id varchar(48) primary key comment '信件id',
 	board_id varchar(48) comment '所属板块',
 	letter_title varchar(50) comment '信件题目',
 	user_id varchar(48) not null comment '用户id',
@@ -38,21 +38,22 @@ create table t_letter(
 	letter_shares int(11) default '0' not null comment '分享数',
 	post_id varchar(48) not null comment '内容对应的post_id',
 	letter_digests int(11) default '0' not null comment '点赞数',
-	letter_collects int(11) default '0' not null comment '收藏数'
+	letter_collects int(11) default '0' not null comment '收藏数',
+	letter_type int(4) comment '类型 0:发出 1:收到' 
 )engine = innodb default charset = utf8;
 
 create table t_post(
-	post_id varchar(48) primary key comment '内容id',
+	entity_id varchar(48) primary key comment '内容id',
 	post_text text not null comment '内容文本',
 	last_post_id varchar(48) comment '上一条post_id，可选项',
-	from_user_id varchar(48) comment '发送者id,可选项',
+	user_id varchar(48) comment '发送者id,可选项',
 	to_user_id varchar(48) comment '接收者id,可选项',
 	create_time datetime not null comment '发送时间',
 	digest int (11) default '0' not null comment '点赞数'
 )engine = innodb default charset = utf8;
 
 create table t_dynamicses(
-	dynamics_id varchar(48) primary key comment '动态id',
+	entity_id varchar(48) primary key comment '动态id',
 	dynamics_title varchar(50) comment '动态题目',
 	create_time datetime not null comment '动态时间',
 	views int(11) default '0' not null comment '浏览数',
@@ -72,18 +73,3 @@ create table t_operate_log(
 	time datetime not null comment '时间',
 	entity_type int(4) not null comment '实体类型'
 )engine = innodb default charset = utf8;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
