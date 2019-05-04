@@ -20,7 +20,7 @@
 		</script>
 	</head>
 	<body>
-		<form action="<c:url value="/register.html" />" method="post" onsubmit="return mycheck()">
+		<form action="<c:url value="/register.action" />" method="post" onsubmit="return mycheck()">
 			<c:if test="${!empty errorMsg}">
 				<div style="color:red">${errorMsg}</div> 
 			</c:if>

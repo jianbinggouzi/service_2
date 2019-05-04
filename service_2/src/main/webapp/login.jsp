@@ -13,7 +13,7 @@
 		<c:if test="${!empty errorMsg}">
 			<div style="color:red">${errorMsg}</div>
 		</c:if>
-		<form action="${context}/login/doLogin.html" method="post">
+		<form action="${context}/login/doLogin.action" method="post">
 			<table>
 				<tr>
 					<td width="20%">用户名</td>

@@ -24,7 +24,7 @@ public class Letter extends EntityBaseDomain {
 	private String letterTitle;
 
 	@Column(name = "letter_views")
-	private int letterViews;
+	private int views;
 
 	@Column(name = "letter_replies")
 	private int letterReplies;
@@ -83,12 +83,12 @@ public class Letter extends EntityBaseDomain {
 		return letterTitle;
 	}
 
-	public void setLetterViews(int letterViews) {
-		this.letterViews = letterViews;
+	public void setViews(int views) {
+		this.views = views;
 	}
 
-	public int getLetterViews() {
-		return letterViews;
+	public int getViews() {
+		return views;
 	}
 
 	public void setLetterReplies(int letterReplies) {

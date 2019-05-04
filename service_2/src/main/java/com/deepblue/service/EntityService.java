@@ -1,5 +1,6 @@
 package com.deepblue.service;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import com.deepblue.dao.LetterDao;
 import com.deepblue.dao.OperateLogDao;
 import com.deepblue.dao.Page;
 import com.deepblue.dao.PostDao;
-import com.deepblue.dao.UserDao;
 import com.deepblue.domain.Dynamics;
 import com.deepblue.domain.EntityBaseDomain;
 import com.deepblue.domain.Letter;
@@ -31,8 +31,6 @@ public class EntityService {
 	private BoardDao boardDao;
 
 	private PostDao postDao;
-
-	private UserDao userDao;
 
 	/**
 	 * 添加实体
@@ -69,6 +67,36 @@ public class EntityService {
 	}
 
 	/**
+	 * 更新实体相应的post
+	 * 
+	 * @param f_type
+	 *            类型
+	 * @param entity
+	 */
+	public void updatePostOfEntity(int f_type, EntityBaseDomain entity, String newText) {
+		String postId = null;
+		switch (f_type) {
+		case ConfigVars.TYPE_LETTER:
+			Letter letter = (Letter) entity;
+			postId = letter.getMainPost().getId();
+			break;
+		case ConfigVars.TYPE_DYNAMICS:
+			Dynamics dynamics = (Dynamics) entity;
+			postId = dynamics.getMainPost().getId();
+			break;
+		case ConfigVars.TYPE_POST:
+			Post post = (Post) entity;
+			postId = post.getId();
+			break;
+		}
+		if (postId != null) {
+			Post _post = postDao.get(postId);
+			_post.setPostText(newText);
+			postDao.update(_post);
+		}
+	}
+
+	/**
 	 * 删除实体
 	 * 
 	 * @param f_type
@@ -89,6 +117,25 @@ public class EntityService {
 	}
 
 	/**
+	 * 根据id搜索相关实体
+	 * 
+	 * @param f_type
+	 * @param id
+	 * @return
+	 */
+	public EntityBaseDomain getEntityById(int f_type, Serializable id) {
+		switch (f_type) {
+		case ConfigVars.TYPE_LETTER:
+			return letterDao.get(id);
+		case ConfigVars.TYPE_DYNAMICS:
+			return dynamicsDao.get(id);
+		case ConfigVars.TYPE_POST:
+			return postDao.get(id);
+		}
+		return null;
+	}
+
+	/**
 	 * 获取用户发出的实体
 	 * 
 	 * @param f_type
@@ -104,7 +151,7 @@ public class EntityService {
 		case ConfigVars.TYPE_DYNAMICS:
 			return dynamicsDao.queryDynamiceBuUserId(user.getUserId(), pageNo, pageSize);
 		case ConfigVars.TYPE_POST:
-			return postDao.getUserSendPosts(user.getUserId(), pageNo, pageSize);
+			return postDao.getPostsBySender(user.getUserId(), pageNo, pageSize);
 		}
 		return null;
 	}
@@ -123,9 +170,19 @@ public class EntityService {
 		case ConfigVars.TYPE_LETTER:
 			return letterDao.getUserLetters(user.getUserId(), pageNo, pageSize, ConfigVars.LETTER_TYPE_RECEIVE);
 		case ConfigVars.TYPE_POST:
-			return postDao.getUserReceivePosts(user.getUserId(), pageNo, pageSize);
+			return postDao.getPostsByReceiver(user.getUserId(), pageNo, pageSize);
 		}
 		return null;
+	}
+
+	/**
+	 * 获取指定Post下的所有评论
+	 * 
+	 * @param posiId
+	 * @return
+	 */
+	public Page getComments(String postId, int pageNo, int pageSize) {
+		return postDao.getPagedPostsByLastId(postId, pageNo, pageSize);
 	}
 
 	@Autowired
@@ -151,11 +208,6 @@ public class EntityService {
 	@Autowired
 	public void setPostDao(PostDao postDao) {
 		this.postDao = postDao;
-	}
-
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
 	}
 
 }

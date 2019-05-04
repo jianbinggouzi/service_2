@@ -64,7 +64,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>deepblue</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>

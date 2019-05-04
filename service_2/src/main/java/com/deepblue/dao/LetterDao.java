@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deepblue.cons.ConfigVars;
 import com.deepblue.domain.Letter;
+import com.deepblue.domain.User;
 
 @Repository
 public class LetterDao extends BaseDao<Letter> {
@@ -59,5 +60,31 @@ public class LetterDao extends BaseDao<Letter> {
 
 	public Page queryLetterByTitle(String title, int pageNo, int pageSize) {
 		return pageQueryByHQL(QUERY_LETTERS_BY_TITLE, pageNo, pageSize, title);
+	}
+
+	/**
+	 * 对相应信件实例的点赞\回复\分享\收藏\打赏\感谢数进行修改
+	 * 
+	 * @param letter
+	 * @param operateType
+	 * @param sendUser
+	 * @param toUser
+	 */
+	public void changeLogOnLetter(Letter letter, int operateType, User sendUser, User toUser) {
+		letter = get(letter.getId());
+		if (operateType == ConfigVars.OPERATE_DIGEST) {
+			letter.setDigests(letter.getDigests() + 1);
+		} else if (operateType == ConfigVars.OPERATE_REPLIES) {
+			letter.setLetterReplies(letter.getLetterReplies() + 1);
+		} else if (operateType == ConfigVars.OPERATE_COLLECT) {
+			letter.setCollects(letter.getCollects() + 1);
+		} else if (operateType == ConfigVars.OPERATE_REWARD) {
+			// 打赏
+		} else if (operateType == ConfigVars.OPERATE_SHARE) {
+			letter.setLetterShares(letter.getLetterShares() + 1);
+		} else if (operateType == ConfigVars.OPERATE_THANK) {
+			letter.setThanks(letter.getThanks() + 1);
+		}
+		update(letter);
 	}
 }

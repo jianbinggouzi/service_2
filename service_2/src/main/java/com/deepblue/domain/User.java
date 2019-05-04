@@ -129,4 +129,8 @@ public class User extends BaseDomain {
 		this.lastIp = lastIp;
 	}
 
+	public boolean equals(User user) {
+		return userId.equals(user.getUserId()) && password.equals(user.getPassword());
+	}
+
 }

@@ -64,6 +64,10 @@ public class BaseDao<T> {
 		getHibernateTemplate().save(entity);
 	}
 
+	public void saveOrUpdate(T entity) {
+		getHibernateTemplate().saveOrUpdate(entity);
+	}
+
 	/**
 	 * 删除PO实例
 	 * 

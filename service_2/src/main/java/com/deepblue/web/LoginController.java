@@ -55,9 +55,6 @@ public class LoginController extends BaseController {
 		} else {
 
 			userService._getUserById(_user.getUserId());
-			System.out.println("" + 2 + "-------------");
-
-			System.out.println("-----------");
 			_user.setLastIp(request.getRemoteAddr());
 			_user.setLastVisit(new Date());
 			userService.loginSuccess(_user);
