@@ -46,7 +46,7 @@ public class OperateController extends BaseController {
 
 		// 开始记录
 		operateService.changeLogOnEntity(operateLog);
-		operateService.addOperateLog(operateLog);
+		operateService.saveOperateLog(operateLog);
 		try {
 			response.getWriter().write("success");
 			response.getWriter().close();

@@ -168,7 +168,7 @@ public class BaseDao<T> {
 	public Page pageQueryByHQL(String hql, int pageNo, int pageSize, Object... params) {
 		String countQueryString = "select count (*)" + removeSelect(removeOrders(hql));
 		List listCount = getHibernateTemplate().find(countQueryString, params);
-		long totalCount = (Long) (listCount.get(0));
+		long totalCount = listCount == null ? 0 : (Long) (listCount.get(0));
 
 		if (totalCount < 1)
 			return new Page();

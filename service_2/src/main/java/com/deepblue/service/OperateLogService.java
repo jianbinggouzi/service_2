@@ -85,8 +85,30 @@ public class OperateLogService {
 	 * 
 	 * @param operateLog
 	 */
-	public void addOperateLog(OperateLog operateLog) {
+	public void saveOperateLog(OperateLog operateLog) {
 		operateLogDao.saveOrUpdate(operateLog);
+	}
+
+	/**
+	 * 获取指定用户收到的指定类型的操作数
+	 * 
+	 * @param userId
+	 * @param operateType
+	 * @return
+	 */
+	public long getOperateCountByReceiver(String userId, int operateType) {
+		return operateLogDao.getOperateCountByReceiver(userId, operateType);
+	}
+
+	/**
+	 * 获取指定用户发出的指定类型的操作数
+	 * 
+	 * @param userId
+	 * @param operateType
+	 * @return
+	 */
+	public long getOperateCountBySender(String userId, int operateType) {
+		return operateLogDao.getOperateCountBySender(userId, operateType);
 	}
 
 }

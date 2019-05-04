@@ -173,7 +173,7 @@ public class ForumController extends BaseController {
 			// System.out.println("" + resultList.get(i));
 
 		}
-		Gson gson = new JsonUtils().getSkipIdGson(new String[] { "password", "lastVisit", "lastIp" }, null);
+		Gson gson = JsonUtils.getSkipIdGson(new String[] { "password", "lastVisit", "lastIp" }, null);
 		try {
 			response.getWriter().write(gson.toJson(res));
 		} catch (IOException e) {
