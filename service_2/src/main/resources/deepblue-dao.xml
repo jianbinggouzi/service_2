@@ -18,7 +18,10 @@
 		p:driverClassName="${jdbc.driverClassName}"
 		p:url="${jdbc.url}"
 		p:username="${jdbc.username}"
-		p:password="${jdbc.password}"/>
+		p:password="${jdbc.password}"
+	      	p:validationQuery="select 1"
+		p:testWhileIdle="true"
+		p:timeBetweenEvictionRunsMillis="10000"/>
 	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
